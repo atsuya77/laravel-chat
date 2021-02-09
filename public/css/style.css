@@ -1,0 +1,50 @@
+.header {
+  background-color: #00B900;
+}
+
+.header div {
+  color: white;
+  font-weight: 900;
+}
+.content {
+  text-align: center;
+  padding-bottom: 4em;
+}
+.send-area__btn {
+  color: white;
+  background-color: #4acc17;
+  font-weight: 900;
+}
+
+.send-area__input {
+  display: inline-block;
+  position: relative;
+  width: calc(100% - 60px);
+}
+
+.send-area__input input {
+  vertical-align: middle;
+  position: relative;
+  width: 98%;
+}
+
+.send-area {
+  background-color: white;
+  padding: 0 5px;
+  box-sizing: border-box;
+  line-height: 49px;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  border-top: solid 1px #ccc;
+}
+.msg, .msg--reply {
+  display: inline-block;
+  background-color: rgb(189, 243, 135);
+  padding: 1em;
+  border-radius: 10%;
+}
+
+.msg--reply {
+  background-color: #eee;
+}
