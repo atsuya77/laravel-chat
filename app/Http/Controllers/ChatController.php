@@ -7,84 +7,23 @@ use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function index()
-  {
-    return view('index');
-  }
-
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create(Request $request)
-  {
-    $msg = $request->input('msg');
-    // 変数をビューに渡す
-    return view('index')->with([
-      "msg" => $msg
-    ]);
-  }
-
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
   //フォームデータ格納
   public function post(Request $request)
   {
-    return response()->json(['test' => $request]);
+    $parmas = Chat::create([
+      'text' => $request["query"],
+      'value' => $request["value"],
+    ]);
+    return $parmas;
   }
-
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\Chat  $chat
-   * @return \Illuminate\Http\Response
-   */
-  public function show(Chat $chat)
+  public function get()
   {
-    //
+    $chats = Chat::all();
+    $data = ['chats' => $chats];
+    return response()->json($data);
   }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  \App\Chat  $chat
-   * @return \Illuminate\Http\Response
-   */
-  public function edit(Chat $chat)
+  public function reset()
   {
-    //
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  \App\Chat  $chat
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, Chat $chat)
-  {
-    //
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  \App\Chat  $chat
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy(Chat $chat)
-  {
-    //
+    Chat::table('chats')->delete();
   }
 }

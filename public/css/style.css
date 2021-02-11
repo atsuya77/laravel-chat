@@ -44,6 +44,14 @@
   padding: 1em;
   border-radius: 10%;
 }
+.send-area__btn2 {
+  color: white;
+  background-color: #4acc17;
+  font-weight: 900;
+}
+.send-area__btn2{
+  float: right;
+}
 
 .msg--reply {
   background-color: #eee;

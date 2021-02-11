@@ -18,5 +18,5 @@ Route::get('/', function () {
   return view('index');
 });
 Route::post('/post', 'ChatController@post');
-//Route::get('/', 'ChatController@index');
-Route::get('/', 'ChatController@create');
+Route::get('/get', 'ChatController@get');
+Route::post('/reset', 'ChatController@reset');

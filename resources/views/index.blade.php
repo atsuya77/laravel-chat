@@ -31,6 +31,7 @@
       {{ csrf_field() }}
       <ons-input id="message" type="text" placeholder="メッセージ" class="send-area__input" name="msg"></ons-input>
       <ons-button id="send" modifier="quiet" class="send-area__btn">送信</ons-button>
+      <ons-button id="send2" modifier="quiet" class="send-area__btn2">リセット</ons-button>
     </form>
   </ons-page>
 </body>
