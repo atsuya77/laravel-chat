@@ -13,7 +13,7 @@ ons.ready(() => {
         </ons-list-item>
     `);
     //API
-    const postAPI = async () => {
+    const postAPI = () => {
       return new Promise((resolve) => {
         $.ajax({
           url: "https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk",
@@ -32,7 +32,7 @@ ons.ready(() => {
         });
       })
     }
-    const postController = async (query,value) => {
+    const postController = (query,value) => {
       return new Promise((resolve) => {
         $.ajax({
           url: "post",
@@ -64,7 +64,7 @@ ons.ready(() => {
 
     postDB()
   });
-  function getDB(){
+  const getDB = () => {
     $.ajax({
           url: "get",
           dataType:"json",
@@ -72,8 +72,14 @@ ons.ready(() => {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
         }).then((data) => {
-          for(var i = 0; i < data.chats.length; i++){
-            if(data.chats[i].value=="1"){
+          // チャットの中身が0件の時
+          if (!data.chats.length) {
+            $('#chats').empty()
+            return
+          }
+
+          data.chats.forEach((chat, i) => {
+            if(chat.value === "1"){
               $('#chats').append(`
                 <ons-list-item modifier="nodivider">
                   <div class="right">
@@ -81,15 +87,14 @@ ons.ready(() => {
                   </div>
                 </ons-list-item>
               `);
-            }
-            else if(data.chats[i].value=="2"){
+            } else if(chat.value === "2"){
               $('#chats').append(`
                 <ons-list-item modifier="nodivider">
                   <span class="msg--reply">${data.chats[i].text}</span>
                 </ons-list-item>
               `);
             }
-          }
+          })
         }).fail((data) => {
           alert('失敗しました。');
         });
@@ -97,13 +102,15 @@ ons.ready(() => {
   getDB();
 
   $("#send2").on("click", (e) => {
-    console.log(e)
     $.ajax({
       url:"reset",
       type: 'POST',
       headers:{
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
+    }).then((data) =>{
+      console.log(`${data}件削除しました`);
+      getDB();
     }).fail(() => {
       alert('失敗しました。');
     })

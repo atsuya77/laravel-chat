@@ -24,6 +24,7 @@ class ChatController extends Controller
   }
   public function reset()
   {
-    Chat::table('chats')->delete();
+    $result = Chat::query()->delete();
+    return $result;
   }
 }
